@@ -69,7 +69,10 @@ def motionDetectedHandler(evt) {
         log.debug "Sunset -30 is $SRSS.sunset)"
         log.debug "Sunrise +30 is $SRSS.sunrise)"
     if (between) {
+        log.debug "Sun Has Set, Allow Switch to Turn On"
         theswitch.on()
+        }else{
+        log.debug "Sun Has NOT Set, DO NOT Allow Switch to Turn On"
     } 
     
     
@@ -99,8 +102,7 @@ def checkMotion() {
             theswitch.off()
             } else {
             log.debug "Motion has not stayed inactive long enough since last check ($elapsed ms):  doing nothing"
-           // def thresholddiff = (threshold-elapsed)/1000
-            //runIn(thresholddiff, checkMotion)
+
         }
     } else {
             // Motion active; just log it and do nothing
