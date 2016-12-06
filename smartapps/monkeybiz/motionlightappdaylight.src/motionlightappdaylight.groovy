@@ -37,7 +37,7 @@ preferences {
     }
     
     section("Zip Code") {
-        input "localZipCode", "number", title: "Zip Code", required: true
+        input "localZipCode", "string", title: "Zip Code", required: true
     }
 }
 
