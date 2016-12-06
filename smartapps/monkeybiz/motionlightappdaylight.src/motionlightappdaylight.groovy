@@ -14,7 +14,7 @@
  *
  */
 definition(
-    name: "MotionLightApp",
+    name: "MotionLightAppDayLight",
     namespace: "MonkeyBiz",
     author: "MonkeyBiz",
     description: "Turn Lamp On/Off With Motion",
