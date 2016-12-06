@@ -17,7 +17,7 @@ definition(
     name: "MotionLightAppDayLight",
     namespace: "MonkeyBiz",
     author: "MonkeyBiz",
-    description: "Turn Lamp On/Off With Motion",
+    description: "Turn Lamp On/Off With Motion Within 30 minutes of Sunrise/Sunset",
     category: "Convenience",
     iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience.png",
     iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png",
@@ -63,11 +63,11 @@ def initialize() {
 // TODO: implement event handlers
 def motionDetectedHandler(evt) {
     log.debug "motionDetectedHandler called: $evt"
-        def thirtyMinsBeforeSunset = getSunriseAndSunset(zipCode: localZipCode,sunsetOffset: "-00:30")
-        def thirtyMinsAftereSunrise = getSunriseAndSunset(zipCode: localZipCode,sunriseOffset: "+00:30")
-        def between = timeOfDayIsBetween(thirtyMinsBeforeSunset, thirtyMinsAftereSunrise, new Date(), location.timeZone)
-        log.debug "Sunset -30 is $thirtyMinsBeforeSunset)"
-        log.debug "Sunrise +30 is $thirtyMinsAftereSunrise)"
+        def SRSS = getSunriseAndSunset([zipCode: localZipCode,sunsetOffset: "-00:30",sunriseOffset: "00:30"])
+
+        def between = timeOfDayIsBetween(SRSS.sunset, SRSS.sunrise, new Date(), location.timeZone)
+        log.debug "Sunset -30 is $SRSS.sunset)"
+        log.debug "Sunrise +30 is $SRSS.sunrise)"
     if (between) {
         theswitch.on()
     } 
